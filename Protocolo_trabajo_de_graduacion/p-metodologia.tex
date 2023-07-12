@@ -1,0 +1,66 @@
+\subsection*{Investigación preliminar}
+
+Lo primero a realizar para este proyecto es una Investigación sobre distintos
+métodos de carga tanto para baterías Li-ion así como para baterías NiMH. Adicionalmente
+se investigarán circuitos integrados que cumplan estas funciones así como circuitos
+discretos, es decir circuitos que no se encuentran integrados en un encapsulado, para 
+la carga de las baterías.  Así también, se realizará una investigación sobre la construcción
+de multiplexores de potencia, tanto con circuitos integrados existentes como con componentes
+discretos.
+
+\subsection*{Simulación del circuito para la carga de baterías Li-ion y NiMH}
+
+Para este paso, luego de haber seleccionado los circuitos para la carga de baterías
+Li-ion y NiMH, se realizará su simulación para determinar distintos parámetros, como lo 
+es la potencia consumida por cada componente, su corriente y voltaje entre otros.
+Esto para poder dimensionar de forma correcta cada componente al momento de realizar 
+el diseño del circuito impreso(PCB).
+
+\subsection*{Prototipado de los circuitos para la carga de baterías}
+
+Se realizará el diseño y manufactura del circuito impreso para cada uno
+de los circuitos de carga, de forma independiente uno del otro, para luego
+comprobar su correcto funcionamiento así como determinar el tiempo de carga
+de cada batería.
+
+\subsection*{Simulación del multiplexor de potencia}
+
+Se realizará la simulación del circuito seleccionado para realizar la función
+de multiplexado para la selección de la fuente de alimentación (batería Li-ion
+o NiMH) para el Pololu 3Pi+. También se verificará su comportamiento tanto
+en estado estacionario como de su comportamiento en el régimen transitorio.
+
+\subsection*{Prototipado del multiplexor de potencia}
+
+Para este paso se llevará a cabo el diseño y manufactura del circuito impreso
+para el multiplexor de potencia, verificando su comportamiento con relación a 
+la simulación. Se realizarán mediciones para verificar que el comportamiento 
+en el régimen transitorio sea el adecuado para proveer potencia de forma 
+ininterrumpida al agente robótico Pololu 3Pi+.
+
+\subsection*{Integración de los circuitos diseñados}
+
+Se realizará la integración de los circuitos diseñados previamente en un 
+único circuito impreso, para luego verificar que cada uno funcione de forma
+correcta cada uno, así como también su operación en conjunto. Se verificará
+que sea posible la carga de las dos baterías al mismo tiempo mientras se
+emplea la fuente de alimentación externa para el suministro de potencia del
+Pololu 3Pi+.
+
+\subsection*{Implementación del algoritmo para detección de carga en las baterías}
+
+Se procederá a implementar un algoritmo para determinar el estado de carga de baterías,
+de forma que en el momento en el cual una de las dos baterías tenga un estado de carga bajo,
+se cambie a la batería de respaldo, o en caso de que ambas se encuentren con un estado de 
+carga bajo, iniciar el proceso para que el agente robótico Pololu 3Pi+ se dirija hacia su 
+estación de carga.
+
+\subsection*{Desarrollo del prototipo para la estación de carga}
+
+Como ultima actividad se realizará el desarrollo del prototipo para la estación de carga. 
+Este desarrollo comprenderá tanto la estructura física para la estación como el \textit{hardware}
+para poder proveer de potencia al sistema de carga multiquímica así como para detectar que la 
+estación se encuentra en uso. 
+
+
+
