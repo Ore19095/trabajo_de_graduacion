@@ -1,1 +1,16 @@
 key.txt
+listado de componentes preliminar Angel Orellana.xlsx
+Presupuesto_Angel_Orellana.xlsx
+PCB_Design/*/History/*
+PCB_Design/*/Project Logs*/*
+PCB_Design/*/*.PrjPcbStructure
+PCB_Design/*/__Previews
+PCB_Design/*/Project Outputs*/*
+programas/*/.generated_files
+programas/*/build
+programas/*/dist
+simulations/*/*.plt
+simulations/*/*.fft
+simulations/*/*.log
+simulations/*/*.net
+simulations/*/*.raw

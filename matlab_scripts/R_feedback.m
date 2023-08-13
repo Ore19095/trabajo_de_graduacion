@@ -1,5 +1,5 @@
-v_pwm_0 =  4.2; % voltaje cuando el pwm es 0%
-v_pwm_100 = 1.8; % voltaje cuando pwm es 100%
+v_pwm_0 =  4.3; % voltaje cuando el pwm es 0%
+v_pwm_100 = 1.8; % voltaje cuando pwm es 100% a la salida
 
 vpwm_100 = 5; % voltaje cuando pwm es 100%
 
@@ -16,24 +16,37 @@ eqn2 = v_pwm_100*R1*R3/(R1*R3+R2*(R1+R3)) + ...
 R2 = double(R2);
 R3 = double(R3);
 
-fprintf("R2 = %f.2\n",R2)
-fprintf("R3 = %f.2\n",R3)
+fprintf("R2 = %.2f\n",R2)
+fprintf("R3 = %.2f\n",R3)
 
 %% --------- parallel equivalent resistors ----------
 
-R2_a = 3e3;
+R2_a = 1.5e3;
 
-R3_a = 4.7e3;
+R3_a = 3e3;
 
 syms R2_b R3_b
 
 R2_b = double( solve(R2_a*R2_b/(R2_a+R2_b) == R2 ));
 R3_b = double( solve(R3_a*R3_b/(R3_a+R3_b) == R3 ));
 
-fprintf("R2_b = %f.2\n",R2_b)
-fprintf("R3_b = %f.2\n",R3_b)
+fprintf("R2_b = %.2f\n",R2_b)
+fprintf("R3_b = %.2f\n",R3_b)
 
+%% ----------- 
+R2_b_select = 100e3;
+R3_b_select = 300e3;
 
+R1_eq = R1;
+R2_eq = R2_a*R2_b_select/(R2_a+R2_b_select);
+R3_eq = R3_a*R3_b_select/(R3_a+R3_b_select);
 
+vpwm_test = 5   ;
 
+syms vout
 
+eqn = vout*R1_eq*R3_eq/(R1_eq*R3_eq+R2_eq*(R1_eq+R3_eq)) + ...
+    vpwm_test*R1_eq*R2_eq/(R1_eq*R2_eq+R3_eq*(R1_eq+R2_eq)) == 1.235;
+Vout = solve(eqn,0<vout);
+
+fprintf("Vout = %.2f\n ",double(Vout))
