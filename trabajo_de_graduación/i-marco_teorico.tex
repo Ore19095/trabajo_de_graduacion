@@ -248,4 +248,30 @@ de microchip, el microcontrolador incorporado se encuentra preprogramado con un 
  utilizado para generar los 8, 5 y 3.3 voltios de la placa) es seleccionado mediante un multiplexor de potencia, más 
  específicamente se emplea el circuito integrado (IC) TPS2113A fabricado por Texas Instruments \cite{noauthor_pololu_nodate}.
 
+ \section{LM2596}
+
+ El LM2596 es un IC el cual permite el diseño de un convertidor reductor que posee integrado
+ el conmutador, por lo que únicamente es necesario añadir un inductor, diodo y capacitor de forma externa para
+ tener un convertidor reductor. Este viene en versiones con voltajes de salida fijos y también con una versión 
+ ajustable.  Para la versión ajustable la tensión de referencia es de 1.23 V de forma típica, para establecer
+ el voltaje a la salida es necesario añadir 2 resistencias funcionando como divisor de voltaje, de forma que 
+ se le permita al IC sensar el voltaje de salida. Para la determinación de los valores de resistencias es utilizada
+ la ecuación \ref{eq:lm2596}. 
+
+ \begin{figure}
+    \centering
+    \includegraphics[scale=0.7]{imagenes/LM2596_adj.png}
+    \caption{Convertidor reductor utilizando el LM2596 en su versión ajustable \cite{lm2596}}
+    \label{fig:lm2596}
+ \end{figure}
  
+\begin{equation}
+    R_2 = R_1(\frac{V_{out}}{V_{ref}} - 1)
+    \label{eq:lm2596}
+\end{equation}
+
+En donde $R_1$ y $R_2$ son los las resistencias con los mismos nombres mostrados en la figura \ref{fig:lm2596}
+mientras que $V_{ref}$ es el voltaje de referencia interno del IC, y $V_{out}$ es el voltaje de salida deseado.
+
+Es posible desactivar el funcionamiento del LM2596 aplicando un voltaje superior a 2 V, en el pin 
+$\overline{\text{ON}}\backslash\text{OFF}$.

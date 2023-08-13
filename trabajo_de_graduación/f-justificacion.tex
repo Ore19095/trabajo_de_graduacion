@@ -1,0 +1,16 @@
+Para asegurar la autonomía de los agentes robóticos es necesario proporcionar un sistema
+de alimentación mediante el uso de baterías, para ello los agentes robóticos Pololu 3Pi+
+ tienen como fuente de energía cuatro celdas de 
+ baterías recargables NiMH en serie. Sin embargo, no presentan un sistema de
+ carga incorporado debido a esto es necesaria la extracción de las mismas para 
+ su recarga. Implicando esto, la participación activa del operador
+ para la recarga de las baterías, lo cual a su vez no es escalable  al emplear una gran cantidad de
+ agentes robóticos Pololu 3Pi+.
+
+Este trabajo pretende llevar a un mayor grado la autonomía de los agentes Pololu 3Pi+ mediante
+la implementación de un sistema de carga multiquímica que permita la recarga del banco de baterías
+NiMH incorporado, sin la necesidad de su extracción. Adicionalmente, se incorpora una batería de 
+respaldo LiON 18650 para aumentar su autonomía y que pueda ser empleada para la alimentación de módulos
+adicionales del agente robótico. Como parte del sistema de carga, también se diseñarán estaciones de carga
+magnéticas, de forma que cuando los agentes Pololu 3Pi+ presenten un bajo nivel de carga, estos puedan acudir 
+a la estación más cercana para realizar la carga de ambas baterías. 
