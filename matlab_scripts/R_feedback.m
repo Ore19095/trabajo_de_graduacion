@@ -1,5 +1,5 @@
-v_pwm_0 =  4.3; % voltaje cuando el pwm es 0%
-v_pwm_100 = 1.8; % voltaje cuando pwm es 100% a la salida
+v_pwm_0 =  5.6; % voltaje cuando el pwm es 0%
+v_pwm_100 = 4.4; % voltaje cuando pwm es 100% a la salida
 
 vpwm_100 = 5; % voltaje cuando pwm es 100%
 
@@ -21,9 +21,9 @@ fprintf("R3 = %.2f\n",R3)
 
 %% --------- parallel equivalent resistors ----------
 
-R2_a = 1.5e3;
+R2_a = 3.3e3;
 
-R3_a = 3e3;
+R3_a = 15e3;
 
 syms R2_b R3_b
 
@@ -34,8 +34,8 @@ fprintf("R2_b = %.2f\n",R2_b)
 fprintf("R3_b = %.2f\n",R3_b)
 
 %% ----------- 
-R2_b_select = 100e3;
-R3_b_select = 300e3;
+R2_b_select = 10e3;
+R3_b_select = 30e3;
 
 R1_eq = R1;
 R2_eq = R2_a*R2_b_select/(R2_a+R2_b_select);

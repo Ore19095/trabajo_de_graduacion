@@ -1,0 +1,15 @@
+- calentamiento de capacitor de desacoplo
+- medir esr de los capacitores
+
+
+Resistencias en paralelo para convertidores
+
+Li-ion
+
+2K y 10K
+10K y 15K
+
+MiMH
+
+3.3K y 10K
+15K y 30K
