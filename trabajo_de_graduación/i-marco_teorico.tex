@@ -24,7 +24,7 @@ su funcionamiento seguro y prolongar su vida útil \cite{texas_instrumens_multi-
 
 
 \subsection{Algoritmos de carga para baterías Li-ion}
-
+\label{sec:alg_lion}
 Para la carga de las baterías Li-ion, el método más conocido es el de corriente constante-voltaje constante (CC/VC), esto 
 debido a la simplicidad y fácil implementación. Durante la primera etapa de este algoritmo, se aplica una corriente constante
 a la batería, hasta que el voltaje de esta alcance un valor preestablecido ($V_{preset}$), usualmente 4.2 voltios, luego se aplica 
@@ -75,7 +75,7 @@ el cual es de 1.2V, por lo que en aplicaciones típicas es requerido el uso de 3
 
 
 \subsection{Algoritmos de carga para baterías NiMH}
-
+\label{sec:alg_nimh}
 El algoritmo de cambio de voltaje negativo (\textit{negative delta voltage method}) es un método de carga empleado
 en las baterías NiMH que consiste en aplicar una corriente de carga constante a la batería, mientras se monitorea 
 el voltaje de la misma. Para determinar cuando la batería se encuentra totalmente cargada se usa la detección de una 
@@ -167,9 +167,23 @@ llega a la ecuación mostrada en \ref{eq:balanceCarga} \cite{erickson_fundamenta
 
 \subsection{Convertidor reductor (\textit{buck converter})}
 
-El convertidor reductor, como su nombre lo indica, lleva a cabo la función de disminuir el voltaje de entrada ($V_g$, en la figura \ref{fig:buck}). Mediante el uso del principio del
-balance voltios-segundo en el inductor , el balance en la carga del capacitor, y adicionalmente empleando la aproximación de rizado pequeño (aproximación en la cual todos los 
-voltajes y corrientes en los elementos de un circuito se consideran constantes), se obtiene que la relación entre el voltaje de entrada y el de salida está dado por $v(t)=DV_g$, donde $D$ es el ciclo de trabajo, que es la fracción de tiempo en la que el interruptor se encuentra en la posición 1 (ver figura \ref{fig:buck}) con respecto al periodo de conmutación \cite{erickson_fundamentals_2020}.
+El convertidor reductor, como su nombre lo indica, lleva a cabo la función de disminuir
+ el voltaje de entrada ($V_g$, en la figura \ref{fig:buck}). Mediante el uso del principio del
+balance voltios-segundo en el inductor , el balance en la carga del capacitor, y
+ adicionalmente empleando la aproximación de rizado pequeño (aproximación en la cual todos los 
+voltajes y corrientes en los elementos de un circuito se consideran constantes  \cite{erickson_fundamentals_2020}),
+ se obtiene que la relación entre el voltaje de entrada y el de salida está dado por 
+ \begin{equation}
+    V=DV_g  
+    \label{eq:salida_buck}
+ \end{equation}
+donde $D$ es el ciclo de trabajo, que es la fracción de tiempo en la que el
+interruptor se encuentra en la posición 1 (ver figura \ref{fig:buck}) con
+respecto al periodo de conmutación, mientras que $V$ es el voltaje 
+a la salida del convertidor ($v(t)$, en la figura \ref{fig:buck})
+ \cite{erickson_fundamentals_2020}. 
+
+
 
 \begin{figure}[H]
     \centering
@@ -177,6 +191,73 @@ voltajes y corrientes en los elementos de un circuito se consideran constantes),
     \caption{Convertidor reductor con elementos ideales \cite{erickson_fundamentals_2020}}
     \label{fig:buck}
 \end{figure}
+
+Debido a que para la deducción de la relación entre voltaje de salida y 
+entrada del convertidor (ecuación \ref{eq:salida_buck}) fue empleada la
+aproximación de rizado pequeño, no se refleja el ruido de conmutación 
+a la salida del circuito. En \cite{erickson_fundamentals_2020} se 
+realiza el análisis para determinar las amplitudes, para el rizado tanto de 
+la corriente del inductor como del voltaje en el capacitor (ecuaciones 
+\ref{eq:ripple_L} y \ref{eq:ripple_C} respectivamente)
+\begin{equation}
+    \Delta I = \frac{V_g-V}{2L}DT_s
+    \label{eq:ripple_L}
+\end{equation}
+
+\begin{equation}
+    \Delta C = \frac{\Delta I T_s}{8C}
+    \label{eq:ripple_C}
+\end{equation}
+
+En las figuras \ref{fig:ripple_L} y \ref{fig:ripple_C} se puede observar la forma de onda del voltaje
+en el capacitor y la corriente en el inductor del convertidor reductor.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=.5]{imagenes/buck_ripple_L.png}
+    \caption{Forma de onda de la corriente en el inductor \cite{erickson_fundamentals_2020}}
+    \label{fig:ripple_L}
+\end{figure}
+
+\begin{figure} [H]
+    \centering
+    \includegraphics[scale=.4]{imagenes/buck_ripple.png}
+    \caption{Forma de onda del voltaje en el capacitor \cite{erickson_fundamentals_2020}}
+    \label{fig:ripple_C}
+\end{figure}
+
+\subsection{LM2596}
+
+ El LM2596 es un IC el cual permite el diseño de un convertidor reductor que opera a una 
+ frecuencia de $150\text{KHz}$ con conmutador integrado
+por lo que únicamente es necesario añadir un inductor, diodo y capacitor de 
+ forma externa para tener un convertidor reductor. 
+ 
+ Este viene en versiones con voltajes de 
+ salida fijos y también con una versión ajustable.  Para la versión ajustable la tensión de
+ referencia es de 1.23 V de forma típica, este voltaje de referencia es el que busca igualar
+ el controlador interno en el pin denominado \textit{feedback}. Para establecer el voltaje
+ a la salida es necesario añadir 2 resistencias funcionando como divisor de voltaje, 
+ de forma que se le permita al IC sensar el voltaje de salida. Para la determinación de los
+valores de resistencias es utilizada la ecuación \ref{eq:lm2596}. 
+
+ \begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.7]{imagenes/LM2596_adj.png}
+    \caption{Convertidor reductor utilizando el LM2596 en su versión ajustable \cite{lm2596}}
+    \label{fig:lm2596}
+ \end{figure}
+ 
+\begin{equation}
+    R_2 = R_1(\frac{V_{out}}{V_{ref}} - 1)
+    \label{eq:lm2596}
+\end{equation}
+
+En donde $R_1$ y $R_2$ son los las resistencias con los mismos nombres mostrados en la
+figura \ref{fig:lm2596} mientras que $V_{ref}$ es el voltaje de referencia interno del
+IC, y $V_{out}$ es el voltaje de salida deseado. Es posible desactivar el funcionamiento
+del LM2596 aplicando un voltaje superior a 2 V, en el pin 
+$\overline{\text{ON}}\backslash\text{OFF}$.
 
 
 \section{Multiplexores de potencia}
@@ -203,7 +284,7 @@ diodos o circuitos integrados que se comporten como diodos \cite{triano_basics_2
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.35]{imagenes/minimumMux.png}
+    \includegraphics[scale=.3]{imagenes/minimumMux.png}
     \caption{Sistema mínimo para un multiplexor de potencia \cite{triano_basics_2020}}
     \label{fig:muxDiode}
 \end{figure}
@@ -222,7 +303,7 @@ en el caso sin prioridad, el bloqueo ante corrientes inversas debe seguir presen
 Para el control de multiplexores de potencia, se tienen dos opciones: manual o automático. Un multiplexor de
 potencia manual es aquel en el cual cada fuente de alimentación es seleccionada mediante señales externas. Por el contrario, un multiplexor automático es aquel que no requiere señales externas para el cambio entre 
 una fuente de alimentación y otra, en este tipo de control usualmente existe una entrada de potencia que 
-tiene la prioridad \ref{fig:priorityMux}.
+tiene la prioridad.
 
 \section{Pololu 3Pi+}
 
@@ -248,30 +329,64 @@ de microchip, el microcontrolador incorporado se encuentra preprogramado con un 
  utilizado para generar los 8, 5 y 3.3 voltios de la placa) es seleccionado mediante un multiplexor de potencia, más 
  específicamente se emplea el circuito integrado (IC) TPS2113A fabricado por Texas Instruments \cite{noauthor_pololu_nodate}.
 
- \section{LM2596}
-
- El LM2596 es un IC el cual permite el diseño de un convertidor reductor que posee integrado
- el conmutador, por lo que únicamente es necesario añadir un inductor, diodo y capacitor de forma externa para
- tener un convertidor reductor. Este viene en versiones con voltajes de salida fijos y también con una versión 
- ajustable.  Para la versión ajustable la tensión de referencia es de 1.23 V de forma típica, para establecer
- el voltaje a la salida es necesario añadir 2 resistencias funcionando como divisor de voltaje, de forma que 
- se le permita al IC sensar el voltaje de salida. Para la determinación de los valores de resistencias es utilizada
- la ecuación \ref{eq:lm2596}. 
-
- \begin{figure}
-    \centering
-    \includegraphics[scale=0.7]{imagenes/LM2596_adj.png}
-    \caption{Convertidor reductor utilizando el LM2596 en su versión ajustable \cite{lm2596}}
-    \label{fig:lm2596}
- \end{figure}
  
+
+
+\section{Amplificador operacional}
+
+Un amplificador operacional es un amplificador con una alta ganancia,
+alta impedancia de entrada y baja impedancia de salida. Posee dos entradas
+las cuales son denominadas entrada inversora, entrada no inversora. La salida
+del amplificador operacional es la diferencia entre las dos entradas multiplicada
+por la ganancia del amplificador operacional \cite{electronic_Boylestad}. En 
+la figura \ref{fig:ampOp} se muestra el símbolo de un amplificador operacional.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{imagenes/ideal_opamp.png}
+    \caption{Símbolo de un amplificador operacional \cite{electronic_Boylestad}}
+    \label{fig:ampOp}
+\end{figure}
+
+La ecuación que describe el comportamiento de un amplificador operacional es la siguiente
 \begin{equation}
-    R_2 = R_1(\frac{V_{out}}{V_{ref}} - 1)
-    \label{eq:lm2596}
+    V_{out} = A(V^+ - V^-)
+    \label{eq:ampOp}
 \end{equation}
 
-En donde $R_1$ y $R_2$ son los las resistencias con los mismos nombres mostrados en la figura \ref{fig:lm2596}
-mientras que $V_{ref}$ es el voltaje de referencia interno del IC, y $V_{out}$ es el voltaje de salida deseado.
+Una consecuencia de que la ganancia del amplificador operacional sea muy alta, es que
+la diferencia entre las entradas inversora y no inversora es muy pequeña, por lo que
+se puede considerar que ambas entradas tienen el mismo voltaje. Esta característica
+es conocida como "cortocircuito virtual" \cite{electronic_Boylestad}.
 
-Es posible desactivar el funcionamiento del LM2596 aplicando un voltaje superior a 2 V, en el pin 
-$\overline{\text{ON}}\backslash\text{OFF}$.
+ El hecho de tener una 
+impedancia de entrada infinita implica que no existe corriente de entrada, por lo que
+la corriente que entra por la entrada inversora y no inversora es igual a 0. 
+
+\subsection{Amplificador diferencial}
+
+Un amplificador diferencial es un amplificador operacional que tiene dos entradas
+y una salida. La salida de este amplificador es la diferencia entre las dos entradas
+multiplicada por la ganancia del amplificador diferencial. En la figura \ref{fig:ampDif}
+se muestra el diagrama de un amplificador diferencial \cite{electronic_Boylestad}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[scale=0.5]{imagenes/ampDif.png}
+    \caption{Diagrama de un amplificador diferencial \cite{electronic_Boylestad}}
+    \label{fig:ampDif}
+\end{figure}
+
+La ecuación que describe el comportamiento de un amplificador diferencial es la siguiente:
+\begin{equation}
+    V_{out} =  \frac{R_3(R_2+R_4)}{R_2(R_1+R_3)}V_2 - \frac{R_4}{R_2}V_1
+    \label{eq:ampDif}
+\end{equation}
+
+Si el valor de $R_1$ es igual a $R_2$ y el valor de $R_3$ es igual a $R_4$, la ecuación
+\ref{eq:ampDif} se puede simplificar a la ecuación \ref{eq:ampDifSimp}.
+
+\begin{equation}
+    V_{out} =  \frac{R_4}{R_2}(V_2 - V_1)
+    \label{eq:ampDifSimp}
+\end{equation}

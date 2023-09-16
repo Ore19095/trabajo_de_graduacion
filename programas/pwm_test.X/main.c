@@ -5,14 +5,14 @@
  * Created on July 12, 2023, 4:58 PM
  */
 
-
+#define F_CPU 8000000UL
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdint.h>
 
 
 #define ADC_START 0x40 //set the start bit
-#define F_CPU 8000000UL
+
 
 
 uint16_t current = 123;
@@ -42,7 +42,7 @@ int main(void) {
     TCCR1A = 0b10100011;  //[7:6] COM1A1 [1:0] Clear OC1A on match
                             //[5:4] COM1B1 [1:0] Clear OC1B on match
                             //[1:0] WGM1 [1:0] Fast PWM, 10-bit
-    TCCR1B = 0b00001001;  /*[7:5] no usado
+    TCCR1B = 0b00001101;  /*[7:5] no usado
                              *[4:3] WGM1 [3:2] Fast PWM, 10-bit
                              *[2:0] CS1  [2:0] clk/1  */
     OCR1A = 1023; //pwm 100%

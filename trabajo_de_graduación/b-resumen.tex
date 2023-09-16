@@ -1,0 +1,36 @@
+Este proyecto se centra en el desarrollo de un sistema de carga multiquímica para baterías NiMH y Li-ion.
+Para ello fue necesario el diseño de  una fuente de corriente/voltaje constante 
+la cual es  controlada mediante una señal analógica de voltaje.
+
+Para medir con la corriente entregada a las baterías (cuando se opera en modo de
+corriente constante), se ha implementado un sensor utilizando el amplificador
+operacional TL082 en configuración amplificador diferencial, 
+junto con una resistencia shunt de $15 \text{m}\Omega$ para la conversión de corriente a
+voltaje.
+
+Además, se ha diseñado un conversor digital a analógico que utiliza
+uno de los dos amplificadores operacionales del TL082 en configuración seguidor
+en conjunto con un filtro RC con una frecuencia de corte de 72.3 Hz para filtrar
+los armónicos de una señal PWM de forma que unicamente se tenga a la salida la
+componente DC de la señal PWM.
+
+Para la carga de las baterías NiMH se ha implementado el algoritmo de carga 
+denominado cambio negativo de voltaje el cual consiste en la detección de un
+cambio negativo en el voltaje de la batería, lo cual indica que la batería 
+se encuentra completamente cargada. Para la carga de las baterías 
+Li-ion se ha implementado el algoritmo de carga
+denominado carga por corriente constante-voltaje constante, deteniendo el proceso
+de carga cuando la corriente entregada a la batería es menor al 10\% de la capacidad
+de la batería.
+
+Un multiplexor de potencia se ha implementado para la conmutación de la fuente de
+alimentación de las baterías NiMH y Li-ion hacia el sistema de carga, de forma que
+se pueda cargar una batería a la vez. Asi mismo se implementó un multiplexor de
+potencia para determinar cual batería se encuentra conectada 3pi+.
+ 
+El sistema de carga incluye una estación con conectores USB A hembra para
+suministrar 12 V a la placa de expansión del agente robótico Pololu 3Pi+ y 
+permitir el paso de líneas de comunicación UART del microcontrolador por medio
+de un cable usb magnético.
+
+

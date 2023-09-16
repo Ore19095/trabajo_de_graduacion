@@ -1,6 +1,49 @@
 \usepackage{derivative}
 \usepackage{pgfgantt}
 \usepackage{xcolor,colortbl}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{pdfpages}
 
 \renewcommand\labelenumii{\theenumi.\arabic{enumii}.}
 \renewcommand\labelenumiii{\theenumi.\theenumi.\arabic{enumii}.}
+
+% Define colors for code highlighting
+\definecolor{keywordcolor}{RGB}{0,0,255}
+\definecolor{commentcolor}{RGB}{0,128,0}
+\definecolor{stringcolor}{RGB}{255,0,0}
+\definecolor{registercolor}{RGB}{128,0,128}
+
+\lstdefinestyle{atmega328}{
+    language=C,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{keywordcolor},
+    commentstyle=\color{commentcolor},
+    stringstyle=\color{stringcolor},
+    morekeywords={uint8_t,uint16_t,uint32_t},
+    sensitive=false,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]",
+    showstringspaces=false,
+    breaklines=true,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    keywordstyle={[2]\color{registercolor}},
+    keywords=[2]{DDRB, PORTB, PINB, DDRD, PORTD, PIND},
+    emph={volatile},
+    emphstyle=\textbf,
+    literate=%
+      {á}{{\'a}}1
+      {é}{{\'e}}1
+      {í}{{\'i}}1
+      {ó}{{\'o}}1
+      {ú}{{\'u}}1
+      {Á}{{\'A}}1
+      {É}{{\'E}}1
+      {Í}{{\'I}}1
+      {Ó}{{\'O}}1
+      {Ú}{{\'U}}1
+}
+
+\lstset{style=atmega328}
