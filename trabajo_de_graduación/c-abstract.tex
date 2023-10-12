@@ -1,15 +1,31 @@
-This project focuses on the development of a multi-chemistry charging system for
-NiMH and Li-ion batteries. To achieve this, it was necessary to design a 
-constant current/voltage source controlled by an analog voltage signal.
+his project focuses on the development of a multi-chemistry charging system 
+for NiMH and Li-ion batteries. To achieve this, it was necessary to design a
+ constant current/voltage source that is controlled by an analog voltage signal.
 
 To measure the current delivered to the batteries (when operating in constant
 current mode), a sensor has been implemented using the TL082 operational 
-amplifier in a differential amplifier configuration, along with a $15 \text{m}\Omega$ shunt resistor for current-to-voltage conversion.
+amplifier in a differential amplifier configuration, along with a 
+$15 \text{m}\Omega$ shunt resistor for current-to-voltage conversion.
 
-Furthermore, a digital-to-analog converter (DAC) has been designed using one of the two operational amplifiers in the TL082, configured as a voltage follower, in conjunction with an RC filter with a cutoff frequency of 72.3 Hz to filter out the harmonics of a PWM signal, allowing only the DC component of the PWM signal to pass through.
+Additionally, a digital-to-analog converter has been designed, utilizing
+one of the two operational amplifiers of the TL082 in a follower configuration,
+along with an RC filter with a cutoff frequency of 72.3 Hz to filter out the 
+harmonics of a PWM signal so that only the DC component of the PWM signal is 
+present at the output.
 
-For charging NiMH batteries, the charge algorithm known as "negative voltage change"  has been implemented. This algorithm involves detecting a negative change in battery voltage, indicating that the battery is fully charged. For Li-ion battery charging, the "constant current-constant voltage" charge algorithm has been implemented, with the charging process stopping when the current delivered to the battery drops below 10% of the battery's capacity.
+For the NiMH battery charging, the negative voltage change charging algorithm 
+has been implemented, which involves detecting a negative change in the battery
+voltage, indicating that the battery is fully charged. For Li-ion battery 
+charging, the constant current-constant voltage charging algorithm has been
+implemented, halting the charging process when the current delivered to the 
+battery is less than 10\% of the battery's capacity.
 
-A power multiplexer has been implemented to switch the power source from NiMH to Li-ion batteries to the charging system, enabling one battery to be charged at a time. Additionally, a power multiplexer has been implemented to determine which battery is connected to the 3pi+ robot.
+A power multiplexer was designed to manage the charging of both NiMH and
+Li-ion batteries, allowing both batteries to be recharged with a single 
+buck converter. Additionally, another power multiplexer has been incorporated 
+to determine which battery is providing power to the Pololu 3pi+ robotic agent.
 
-The charging system includes a station with female USB A connectors to supply 12V to the Pololu 3Pi+ robot's expansion board and allow the passage of UART communication lines from the microcontroller via a magnetic USB cable.
+Furthermore, a charging station was developed, equipped with female USB-A 
+connectors to supply 12 V to the expansion board of the Pololu 3Pi+ robotic 
+agent. Additionally, the D- and D+ lines of the USB connectors are used for 
+UART communication between the charging system and the station.

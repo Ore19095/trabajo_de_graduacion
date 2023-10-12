@@ -116,6 +116,34 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
+[GeneratedDocument1]
+DocumentPath=Project Outputs for Current_sensor_and_DAC\Gerbers\current_sensor_+_DAC.DRR
+DItemRevisionGUID=
+
+[GeneratedDocument2]
+DocumentPath=Project Outputs for Current_sensor_and_DAC\Gerbers\current_sensor_+_DAC.EXTREP
+DItemRevisionGUID=
+
+[GeneratedDocument3]
+DocumentPath=Project Outputs for Current_sensor_and_DAC\Gerbers\current_sensor_+_DAC.GBL
+DItemRevisionGUID=
+
+[GeneratedDocument4]
+DocumentPath=Project Outputs for Current_sensor_and_DAC\Gerbers\current_sensor_+_DAC.GKO
+DItemRevisionGUID=
+
+[GeneratedDocument5]
+DocumentPath=Project Outputs for Current_sensor_and_DAC\Gerbers\current_sensor_+_DAC.GTL
+DItemRevisionGUID=
+
+[GeneratedDocument6]
+DocumentPath=Project Outputs for Current_sensor_and_DAC\Gerbers\current_sensor_+_DAC.LDP
+DItemRevisionGUID=
+
+[GeneratedDocument7]
+DocumentPath=Project Outputs for Current_sensor_and_DAC\Gerbers\current_sensor_+_DAC.TXT
+DItemRevisionGUID=
+
 [Configuration1]
 Name=Sources
 ParameterCount=0

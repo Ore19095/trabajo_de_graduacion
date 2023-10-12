@@ -1,10 +1,18 @@
 
 \begin{itemize}
-    
+    \item Se diseñó un convertidor DC-DC reductor basado en el circuito
+    integrado LM2596, capaz de entregar una corriente de hasta 1.5A, y
+    con la capacidad de regular el voltaje de salida entre $2.7$V y 
+    $6.4$V mediante una señal analógica.
+
+    %\item Se implementaron algoritmos para la carga de baterías de Li-ion y
+    %NiMH, lo cual incluye la detección de inicio y fin de carga de cada
+    %batería.
+
     \item Se logró diseñar una placa de expansión para el agente robótico
-    Pololu 3Pi+ que incorpora un sistema de carga multiquímica capaz de
-    gestionar la recarga de baterías de iones de litio (Li-ion) y níquel-metalhidruro (NiMH).
-    asi como poder realizar la conmutación mediante un multiplexor de 
+    Pololu 3Pi+ que incorpora el sistema de carga multiquímica capaz de
+    gestionar la recarga de baterías de Li-ion y NiMH,
+    así como poder realizar la conmutación mediante un multiplexor de 
     potencia, entre ambas baterías para la 
     alimentación del agente robótico.
 
@@ -12,6 +20,11 @@
     que proporciona tanto el voltaje como la corriente requerida para el
     funcionamiento óptimo del sistema de carga multiquímica, asi como la
     comunicación con el sistema de carga mediante comunicación UART.
+
+    \item Se diseñó un sensor de corriente y convertidor digital a 
+    analógico con el amplificador operacional TL082, con el fin de
+    medir la corriente entregada por el convertidor DC-DC a las baterías y 
+    proporcionar una salida analógica para el control del convertidor DC-DC.
 
 
 \end{itemize}

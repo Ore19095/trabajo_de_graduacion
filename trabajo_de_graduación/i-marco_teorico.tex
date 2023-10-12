@@ -6,8 +6,9 @@ Las baterías de ion de litio se utilizan ampliamente en sistemas portátiles,
   o expresado en términos de densidad volumétrica, entre 250 y 670 Wh/L según se indica en 
   \cite{noauthor_lithium-ion_nodate}. Estas baterías tienen un rango de voltaje típico de
    3 a 4.2 voltios, lo que implica que se requiere una menor cantidad de celdas para
-alcanzar voltajes más altos. Una celda presenta una larga vida, llegando a tener el 80\%
+alcanzar voltajes elevados. Una celda presenta una larga vida, llegando a tener el 80\%
 de su capacidad luego de 500 ciclos de carga \cite{texas_instrumens_multi-chemistry_2022}.
+
 
 Las baterías Li-Ion presentan algunas desventajas, como su alta sensibilidad a la sobrecarga,
 sobredescarga, corrientes altas, sobrecalentamiento, entre otros factores. Debido a estas características,
@@ -152,7 +153,7 @@ debe ser igual a 0, teniendo como resultado
     \int_0^{T_s} v_L(t) d t = 0
 \end{equation}
 
-este resultado es importante para el analisis de convertidores DC-DC conmutados \cite{erickson_fundamentals_2020}.
+este resultado es importante para el análisis de convertidores DC-DC conmutados \cite{erickson_fundamentals_2020}.
 
 \subsection{Balance en la carga del capacitor}
 
@@ -169,7 +170,7 @@ llega a la ecuación mostrada en \ref{eq:balanceCarga} \cite{erickson_fundamenta
 
 El convertidor reductor, como su nombre lo indica, lleva a cabo la función de disminuir
  el voltaje de entrada ($V_g$, en la figura \ref{fig:buck}). Mediante el uso del principio del
-balance voltios-segundo en el inductor , el balance en la carga del capacitor, y
+balance voltios-segundo en el inductor, el balance en la carga del capacitor, y
  adicionalmente empleando la aproximación de rizado pequeño (aproximación en la cual todos los 
 voltajes y corrientes en los elementos de un circuito se consideran constantes  \cite{erickson_fundamentals_2020}),
  se obtiene que la relación entre el voltaje de entrada y el de salida está dado por 
@@ -226,7 +227,7 @@ en el capacitor y la corriente en el inductor del convertidor reductor.
     \label{fig:ripple_C}
 \end{figure}
 
-\subsection{LM2596}
+\subsubsection{LM2596}
 
  El LM2596 es un IC el cual permite el diseño de un convertidor reductor que opera a una 
  frecuencia de $150\text{KHz}$ con conmutador integrado
@@ -258,6 +259,75 @@ figura \ref{fig:lm2596} mientras que $V_{ref}$ es el voltaje de referencia inter
 IC, y $V_{out}$ es el voltaje de salida deseado. Es posible desactivar el funcionamiento
 del LM2596 aplicando un voltaje superior a 2 V, en el pin 
 $\overline{\text{ON}}\backslash\text{OFF}$.
+
+\subsection{Multiplicador de voltaje (\textit{Charge pump})}
+    \label{sec:charge_pump}
+    Un multiplicador de voltaje es un convertidor conmutado que permite (idealmente)
+    obtener un voltaje de salida que es múltiplo entero del voltaje de entrada
+    (ver ecuación \ref{eq:charge_pump}).
+    
+    \begin{equation}
+        V_{out} = n V_{in}
+        \label{eq:charge_pump}
+    \end{equation}
+    
+    Un circuito empleado comúnmente es denominado \textit{
+    Dickson charge pump} el cual es mostrado en la figura \ref{fig:dickson_charge}.
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=1]{imagenes/Positive_dickson_charge.png}
+        \caption{\textit{ Dickson charge pump} \cite{charge_dikson}}
+        \label{fig:dickson_charge}
+    \end{figure}
+
+    En \cite{charge_dikson} se realiza el análisis del circuito mostrado
+    en la figura \ref{fig:dickson_charge}, con
+    el cual se obtiene que la relación entre voltaje de entrada y salida está dada
+    por la ecuación \ref{eq:dickson_charge}.
+
+    \begin{equation}
+        V_{out} = V_{in} + N \left (  \frac{C}{C+C_s}V_\Phi - V_D - 
+        \frac{I_{out}}{(C+C_s)f} \right )
+        \label{eq:dickson_charge}
+    \end{equation}
+
+    En donde $N$ es el número de etapas en el convertidor, $C$ es la capacitancia
+    entre cada etapa y el nodo $\Phi$ o $\bar{\Phi}$, $f$ es la frecuencia de 
+    operación del multiplicador de voltaje, $V{\Phi}$ es la amplitud
+    de la señal en los nodos $\Phi$ y $\bar{\Phi}$, $C_s$ son capacitancias parásitas,
+    $I_{out}$ es la corriente de salida del
+    convertidor y $V_D$ es la caída de voltaje en el diodo.
+
+    Este mismo convertidor puede ser empleado para obtener un voltaje de salida
+    menor al de entrada (es decir voltajes negativos), para ello es necesario
+    realizar un intercambio entre la carga del circuito y el voltaje de entrada,
+    Por lo que en la ecuación \ref{eq:dickson_charge} $V_{in}$ y $V_{out}$
+    son intercambiados \cite{mohammad_switched_2010}. En la figura 
+    \ref{fig:dickson_charge_bid} se muestra el intercambio entre carga y 
+    voltaje de entrada en el \textit{Dickson charge pump}.
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{imagenes/positive_negative_charge_pump.png}
+        \caption{intercambio entre carga y voltaje de entrada en el
+                 \textit{Dickson charge pump} (CTB, \textit{charge transfer
+                 block} en la figura \ref{fig:dickson_charge} son implementados
+                 con diodos) \cite{mohammad_switched_2010}}
+        \label{fig:dickson_charge_bid}
+    \end{figure}
+
+    Al intercambiar el voltaje de entrada y salida de la ecuación \ref{eq:dickson_charge},
+    y aplicando $0$V en la entrada (que es el caso mostrado en la figura 
+    \ref{fig:dickson_charge_bid}, cuando SW1 y SW2 se encuentran cerrados 
+    con el contacto de la derecha) se tiene que la relación entre voltaje de entrada
+    y salida está dada por la ecuación \ref{eq:dickson_charge_neg}.
+
+    \begin{equation}
+        V_{out} = - N \left (  \frac{C}{C+C_s}V_\Phi - V_D - 
+        \frac{I_{out}}{(C+C_s)f} \right )
+        \label{eq:dickson_charge_neg}
+    \end{equation}
 
 
 \section{Multiplexores de potencia}
@@ -329,9 +399,6 @@ de microchip, el microcontrolador incorporado se encuentra preprogramado con un 
  utilizado para generar los 8, 5 y 3.3 voltios de la placa) es seleccionado mediante un multiplexor de potencia, más 
  específicamente se emplea el circuito integrado (IC) TPS2113A fabricado por Texas Instruments \cite{noauthor_pololu_nodate}.
 
- 
-
-
 \section{Amplificador operacional}
 
 Un amplificador operacional es un amplificador con una alta ganancia,
@@ -364,7 +431,7 @@ impedancia de entrada infinita implica que no existe corriente de entrada, por l
 la corriente que entra por la entrada inversora y no inversora es igual a 0. 
 
 \subsection{Amplificador diferencial}
-
+\label{sec:ampDif}
 Un amplificador diferencial es un amplificador operacional que tiene dos entradas
 y una salida. La salida de este amplificador es la diferencia entre las dos entradas
 multiplicada por la ganancia del amplificador diferencial. En la figura \ref{fig:ampDif}

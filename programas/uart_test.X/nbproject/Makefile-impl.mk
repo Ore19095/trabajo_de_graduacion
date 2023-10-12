@@ -51,6 +51,7 @@ ALLCONFS=default
 
 # all
 .all-impl: .all-pre .depcheck-impl
+		echo a
 	    ${MAKE} SUBPROJECTS=${SUBPROJECTS} CONF=default build
 
 

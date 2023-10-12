@@ -16,7 +16,8 @@
 
 \lstdefinestyle{atmega328}{
     language=C,
-    basicstyle=\ttfamily\small,
+    tabsize=1, 
+    basicstyle=\fontsize{9}{12}\selectfont\ttfamily,
     keywordstyle=\color{keywordcolor},
     commentstyle=\color{commentcolor},
     stringstyle=\color{stringcolor},
@@ -30,7 +31,9 @@
     numbers=left,
     numberstyle=\tiny\color{gray},
     keywordstyle={[2]\color{registercolor}},
-    keywords=[2]{DDRB, PORTB, PINB, DDRD, PORTD, PIND},
+    keywords=[2]{DDRB, PORTB, PINB, DDRD, PORTD, PIND,TCCR0A,
+                TCCR1A,TCCR2A,TCCR0B,TCCR1B,TCCR2B,OCR0A,OCR0B,
+                OCR1A,OCR1B,OCR2A,OCR2B},
     emph={volatile},
     emphstyle=\textbf,
     literate=%
@@ -44,6 +47,8 @@
       {Í}{{\'I}}1
       {Ó}{{\'O}}1
       {Ú}{{\'U}}1
+      {ñ}{{\~{n}}}1
+      {Ñ}{{\~{N}}}1
 }
 
 \lstset{style=atmega328}
