@@ -18,6 +18,7 @@ Vin_no_avg = Vin_inter - mean(Vin_inter);
 Vout_no_avg = Vout_inter - mean(Vout_inter);
 
 input_data = iddata(Vout_no_avg,Vin_no_avg,T);
+figure(3)
 plot(input_data);
 
 % estimate transfer function
@@ -27,12 +28,13 @@ no_poles = 3;
 no_zeros = 0;
 
 tf_sys = tfest(input_data,no_poles,no_zeros,opt)
+figure(1)
 step(tf_sys);
 
 %% Estimado inicial del PID
 
-crossover = 80;
+crossover = 2000;
 [C,info] = pidtune(tf_sys,'pid',crossover)
 
-
+figure(2)
 step(feedback(C*tf_sys,1))

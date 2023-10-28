@@ -75,13 +75,12 @@ int main(void){
     /*Se configura el modulo en modo de operacion CTC, con un
       preescalador de 64 para el reloj del timer, este
       temporizador se utiliza para el control de la
-      frecuencia de la seÃ±al generada con el dac
+      frecuencia de la señal generada con el DAC
       */
     TCCR2A |= (1 << WGM21); // WGM2[1:0] = 0b10
     TCCR2A &= ~(1 << WGM20);
 #if TIMER2_PREESCALER == 1024
-    // CS2[2:0]=0b111,preescaler=1024
-    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20);
+    TCCR2B |= (1 << CS22) | (1 << CS21) | (1 << CS20); // CS2[2:0]=0b111,preescaler=1024
 #elif TIMER2_PREESCALER == 256
     TCCR2B |= (1 << CS22) | (1 << CS21); // CS2[2:0] = 0b110, preescaler = 256
 #elif TIMER2_PREESCALER == 128
