@@ -25,18 +25,18 @@ void send_data(const char* data, uint8_t num);
 
 
 int main(void) {
-    //  ------ CONFIGURACIÓN UART -----------------
+    //  ------ CONFIGURACIÃ“N UART -----------------
     
     UCSR0A |= 1<<U2X0; //UART en modo de alta velocidad
     
     UCSR0B |= 1<<RXEN0; // Habilitar receptor UART
     UCSR0B |= 1<<TXEN0; // Habilitar transmisor UART
    
-    UBRR0 = 51; //19200 baud rate, at 8MHz clock
+    UBRR0 = 0; //19200 baud rate, at 8MHz clock
     
     SREG |= 1<<7;
-    
-    send_data("Hola Inicio\n",11);
+    _delay_ms(5); 
+    send_data("Hola Inicio\n",12);
     while (1) {
         
         send_data("Hola\n",5);
@@ -65,7 +65,7 @@ void send_data(const char* data, uint8_t num){
 // ---------------- ISR ---------------------------
 
 void __interrupt(USART_UDRE_vect_num) udreInt(void){
-    
+     
     if( writePointer == readPointer ){
         UCSR0B&=~(1<<UDRIE0);//desabilitar interrupcion   
     }

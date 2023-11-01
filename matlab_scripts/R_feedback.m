@@ -41,7 +41,7 @@ R1_eq = R1;
 R2_eq = R2_a*R2_b_select/(R2_a+R2_b_select);
 R3_eq = R3_a*R3_b_select/(R3_a+R3_b_select);
 
-vpwm_test = 0 ;
+vpwm_test = 5.5 ;
 
 syms vout
 
