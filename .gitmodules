@@ -1,0 +1,3 @@
+[submodule "Charge_system_firmware"]
+	path = Charge_system_firmware
+	url = https://github.com/Ore19095/Charge_system_firmware
