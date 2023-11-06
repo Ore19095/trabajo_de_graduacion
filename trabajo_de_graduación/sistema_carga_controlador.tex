@@ -1,0 +1,18 @@
+\section{Controlador}
+
+    Para la gestión de los multiplexores de potencia y el control del convertidor
+    reductor se diseñó un controlador basado en el microcontrolador ATmega328p.
+    El cual tiene las siguientes funciones:
+
+    \begin{itemize}
+        \item Controlar el voltaje y corriente de salida del convertidor reductor
+        \item Controlar que batería se está cargando mediante un multiplexor de potencia
+        \item Controlar el multiplexor de potencia para seleccionar la batería
+        que proporcionará la alimentación al agente robótico.
+        \item Permitir la comunicación con la estación de carga mediante comunicación
+        UART.
+        \item  Permitir la comunicación con el adaptador wifi mediante comunicación
+        I2C.
+        \item índicar de forma visual el estado de carga de las baterías mediante
+        2 LEDs.
+    \end{itemize}

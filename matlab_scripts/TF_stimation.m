@@ -38,3 +38,11 @@ crossover = 2000;
 
 figure(2)
 step(feedback(C*tf_sys,1))
+%% ------- Discretizando -----------
+Ts = 1/1000
+C_tf = tf(C)
+pid_discrete = c2d(C_tf,Ts,'Tustin');
+pid_dsp = filt(pid_discrete.Numerator,pid_discrete.Denominator,Ts)
+sys_discrete = c2d(tf_sys,Ts,'Tustin');
+
+step(feedback(pid_discrete*sys_discrete,1));

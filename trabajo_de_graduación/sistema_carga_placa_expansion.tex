@@ -1,0 +1,21 @@
+\section{Placa de expansión para el agente robótico}
+
+Luego de haber probado todos los sistemas en conjunto se procedió a diseñar
+una placa de expansión para el agente robótico Pololu 3Pi+ que permita
+la conexión de todos los sistemas diseñados. Para permitir la conexión
+ entre ambas placas se utilizaron conectores 
+macho ubicados según los planos proporcionados por la 
+empresa Pololu \cite{noauthor_pololu_nodate}.
+Los pines utilizados para la comunicación o transmisión de potencia entre
+ambas placas son los siguientes:
+
+\begin{itemize}
+    \item GND: Todos los pines etiquetados como GND en la placa de control
+    del agente robótico son conectados con la tierra de la placa de expansión.
+    \item VBAT: Este pin es utilizado para realizar la carga de las baterías
+    NiMH presentes en el agente robótico.
+    \item VSW: Este pin es utilizado para alimentar la placa de 
+    control del agente robótico, al momento de que la batería NiMH 
+    se encuentre descargada.
+
+\end{itemize}
