@@ -18,10 +18,12 @@ Vin_no_avg = Vin_inter - mean(Vin_inter);
 Vout_no_avg = Vout_inter - mean(Vout_inter);
 
 input_data = iddata(Vout_no_avg,Vin_no_avg,T);
-figure(3)
+input_data.TimeUnit = 'sec'
+input_data.InputUnit = 'V'
+input_data.OutputUnit = 'V'
 plot(input_data);
 
-% estimate transfer function
+%% estimate transfer function
 opt = tfestOptions('Display','on');
 
 no_poles = 3;
@@ -30,6 +32,8 @@ no_zeros = 0;
 tf_sys = tfest(input_data,no_poles,no_zeros,opt)
 figure(1)
 step(tf_sys);
+
+compare(tf_sys,input_data)
 
 %% Estimado inicial del PID
 

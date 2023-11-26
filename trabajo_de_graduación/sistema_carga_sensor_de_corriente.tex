@@ -60,29 +60,51 @@
     se realizaron mediciones para varios niveles de corriente. Para ello se
     empleó una fuente de voltaje simétrica a $\pm7\text{V}$, y se utilizaron resistencias de entre 
     $4\Omega$ y $30\Omega$ para simular la carga de la batería. Los resultados 
-    obtenidos son mostrados en el cuadro \ref{tb:mediciones_sensor}. 
+    obtenidos son mostrados en la figura \ref{fig:mediciones_sensor_grap}. 
 
-\begin{table}[H]
-    \centering
-    \begin{tabular}{|c|c|c|c|}
-        \hline
-    Corriente medida & Salida del sensor (V) & Valor Ideal (V) & Error (\%) \\
-    \hline
-    0.241            & 0.815                 & 0.795           & 2.48       \\
-    0.480            & 1.546                 & 1584            & 2.40       \\
-    0.713            & 2.270                 & 2.353           & 3.52       \\
-    0.933            & 2.945                 & 3.079           & 4.35       \\
-    1.143            & 3.592                 & 3.772           & 4.77       \\
-    1.354            & 4.24                  & 4.47            & 5.11       \\
-    1.564            & 4.88                  & 5.16            & 5.43 \\
-     \hline     
-    \end{tabular}
-
-    \caption{Valores de salida del sensor de corriente diseñado}
-    \label{tb:mediciones_sensor}
-    \end{table}
-
-
+    \begin{figure}[H]
+        \centering
+\begin{tikzpicture}
+    
+    \begin{axis}[
+        xlabel={Corriente (A)},
+        ylabel={Voltaje (V)},
+        xmin=0, xmax=2,
+        ymin=0, ymax=5.5,
+        legend pos=north west,
+        ymajorgrids=true,
+        xmajorgrids=true,
+        grid style=dashed,
+    ]
+     
+    \addplot[color=orange,mark=o,]
+        coordinates {
+        (0.241,0.741)
+        (0.480,1.405)
+        (0.713,2.063)
+        (0.933,2.677)
+        (1.143,3.265)
+        (1.354,3.854)
+        (1.564,4.43)
+        };
+        \addplot[
+            color=blue,
+            mark=o,
+            ]
+            coordinates {
+            (0.241,0.723)
+            (0.480,1.440)
+            (0.713,2.139)
+            (0.933,2.799)
+            (1.143,3.429)
+            (1.354,4.062)
+            (1.564,4.692)
+            };
+    \end{axis}
+\end{tikzpicture}
+\label{fig:mediciones_sensor_grap}
+\caption{Voltaje de salida del sensor de corriente (naranja valores medidos, azul valores esperados)}
+\end{figure}
     En la figura \ref{fig:mediciones_sensor} se muestra el circuito construido
     en protoboard para la medición de los valores presentados anteriormente.
 

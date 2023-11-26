@@ -89,3 +89,41 @@
         \label{fig:sim_dac_fft_in}
     \end{figure}
 
+    \subsection{Pruebas con DAC}
+
+    Para comprobar el correcto funcionamiento del DAC diseñado se realizó una
+    prueba del DAC, en la cual se generaró 2 señales, una senoidal y una triangular,
+    empleando el DAC y el codigo mostrado en el apéndice \ref{sec:codigo_dac} (el cual 
+    se puede ubicar dentro de los archivos del proyecto de MPLAB nombrado como
+    DAC\_test.X, dentro de la carpeta nombrada Charge\_system\_firmware).
+     En la figura \ref{fig:dac_test_sine}
+    se muestra el resultado de la prueba.
+    
+     \begin{figure}[H]
+        \centering
+
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[scale=0.8]{imagenes/Sine.jpg}
+            \caption{Señal senoidal}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[scale=0.8]{imagenes/Triangular.jpg}
+            \caption{Señal triangular}
+        \end{subfigure}
+
+        \caption{Señal seno y triangular generadas con el DAC}
+        \label{fig:dac_test_sine}
+     \end{figure}
+
+     Se puede observar que ambas señales
+     tienen una amplitud de $5\text{V}$, y que la señal senoidal tiene una frecuencia
+     de $4.91\text{Hz}$, mientras que la señal triangular tiene una frecuencia de
+     $2.56\text{Hz}$. La razon por la cual las frecuencias de las señales generadas
+     son bajas es debido a la frecuencia de corte del filtro RC, que es de $72\text{Hz}$,
+     por lo que señales de mayor frecuencia son atenuadas, hecho que no afecta 
+     al sistema de carga multiquímica, ya que la el cambio de voltaje de voltaje 
+     en ambas baterias se realiza de forma lenta, por lo que no es necesario
+     generar señales de alta frecuencia.
+ 

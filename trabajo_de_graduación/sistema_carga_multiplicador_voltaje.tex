@@ -5,9 +5,10 @@
     un multiplicador de voltaje basado en el circuito \textit{negative 
     Dickson charge pump} presentado en la sección \ref{sec:charge_pump}.
 
-
-    Puesto que este necesita de una señal cuadrada, se utilizó un inversor
-    elaborado con un transistor BJT , en cascada con una etapa de salida 
+    \subsection{Señal de entrada del multiplicador de voltaje}
+    
+    Puesto que el multiplicador de voltaje necesita de una señal cuadrada, se utilizó un inversor
+    elaborado con un transistor BJT, en cascada con una etapa de salida 
     \textit{push-pull}. El inversor es empleado para generar una señal
     cuadrada de amplitud $12\text{V}$ a partir de una señal cuadrada 
     de $5\text{V}$, mientras que la etapa \textit{push-pull}
@@ -51,6 +52,8 @@
     del inversor,asi como disminuir la impedancia, de forma que sea 
     capaz de alimentar el multiplicador de voltaje.
 
+    \subsection{Diseño del multiplicador de voltaje}
+
     Para el diseño del multiplicador de voltaje se estableció que la 
     el valor de $C_1$ y $C_2$ sea de
     $1\mu\text{F}$, que el valor de salida requerido debe ser menor o igual
@@ -71,7 +74,7 @@
     \end{figure}
 
     \begin{equation}
-        V_{out} = -\left(V_\Phi - V_D - \frac{I_{out}}{Cf}  \right)
+        V_{out} = -\left(V_\Phi - V_D - \frac{I_{out}}{Cf}  \right) + V_D
         \label{eq:charge_pump_simp}
     \end{equation}
 
@@ -81,7 +84,7 @@
     \ref{eq:charge_pump_simp2}.
 
     \begin{equation}
-        -\left(V_\Phi - V_D - \frac{I_{out}}{Cf}\right) \leq -7\text{V}
+        -\left(V_\Phi - V_D - \frac{I_{out}}{Cf}\right) + V_D \leq -7\text{V}
         \label{eq:charge_pump_simp2}    
     \end{equation}
 
@@ -92,7 +95,7 @@
     Despejando para la frecuencia se obtiene la ecuación \ref{eq:charge_pump_simp3}.
 
     \begin{equation}
-        f \geq \frac{I_{out}}{C(V_\Phi - V_D - V_{out})}
+        f \geq \frac{I_{out}}{C(V_\Phi - 2V_D - V_{out})}
         \label{eq:charge_pump_simp3}
     \end{equation}
 
@@ -100,11 +103,79 @@
     la frecuencia de operación del multiplicador de voltaje debe de ser 
 
         $$
-            f \geq \frac{10\text{mA}}{1\mu\text{F}(12\text{V} - 0.7\text{V}
-             - 7\text{V})} \approx 2.325\text{KHz}
+            f \geq \frac{10\text{mA}}{1\mu\text{F}(12\text{V} - (2)0.7\text{V}
+             - 7\text{V})} \approx 2.778\text{KHz}
         $$
 
     Ya que este es un valor mínimo para la frecuencia de operación, al utilizar
     una frecuencia mayor se obtendrá un voltaje de salida mayor, por lo que se
     utilizó una frecuencia de operación de $7.81\text{KHz}$, la cual es la
-    frecuencia de la señal PWM generada por el microcontrolador. 
+    frecuencia de la señal PWM generada por el microcontrolador.
+
+    \subsection{Prueba física del multiplicador de voltaje}
+
+    Para comprobar el correcto funcionamiento del multiplicador de voltaje
+    se añadio el multiplicador de voltaje diseñado, a los circuitos de prueba
+    del DAC, el sensor de corriente  y convertidor reductor. En la figura
+    \ref{fig:prueba_multiplicador} se muestra el circuito armado en protoboard.
+    
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.5]{imagenes/prueba_multiplicador.png}
+        \caption{Circuito armado para la prueba del multiplicador de voltaje}
+        \label{fig:prueba_multiplicador}
+    \end{figure}
+
+    Con el circuito armado se midió el voltaje de salida del multiplicador
+    de voltaje, en las figuras \ref{fig:out_multiplicador_load} y \ref{fig:out_multiplicador_no_load}
+    se muestra el voltaje de salida del multiplicador de voltaje con y sin carga,
+    respectivamente.
+
+    \begin{figure}[H]
+        \centering
+
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[scale=0.8]{imagenes/negative_charge_no_load.jpg}
+            \caption{Sin carga}
+            \label{fig:out_multiplicador_no_load}
+        \end{subfigure}
+        \begin{subfigure}{0.45\textwidth}
+            \centering
+            \includegraphics[scale=0.8]{imagenes/negative_charge_load.jpg}
+            \caption{Con carga}
+            \label{fig:out_multiplicador_load}
+        \end{subfigure}
+        \caption{Voltaje de salida del multiplicador de voltaje}
+    \end{figure}
+    
+    en la figura \ref{fig:out_multiplicador_no_load} se puede observar que
+    el voltaje de salida del multiplicador de voltaje es de $-10.5\text{V}$ en 
+    promedio, mientras que en la figura \ref{fig:out_multiplicador_load} se
+    puede observar que el voltaje de salida del multiplicador de voltaje es de
+    $-8.23\text{V}$ en promedio. este resultado es el esperado, ya que el
+    cuando se le coloca una carga al multiplicador de voltaje, la corriente
+    de salida hace que el voltaje de salida disminuya, como es indicado en la 
+    ecuación \ref{eq:charge_pump_simp}.
+
+    Sabiendo que los diodos utilizados en el multiplicador de voltaje tienen
+    una caída de voltaje de $0.7\text{V}$, se puede calcular el voltaje de
+    salida del multiplicador de voltaje, utilizando la ecuación \ref{eq:charge_pump_simp}.
+    Con la cual se espera que el voltaje de salida del multiplicador de voltaje
+    al no haber carga sea de $-10.6\text{V}$, mientras que al haber carga, con
+    una frecuencia de operación de $7.81\text{KHz}$, se espera que el voltaje
+    de salida del multiplicador de voltaje sea de $-9.3\text{V}$, caso en el 
+    cual se obtuvo un voltaje de $-8.23\text{V}$.
+    
+    La razón por la cual el voltaje de salida del multiplicador de voltaje es menor al esperado,
+     es debido a varios factores:la toleracia de los capacitores empleados, el voltaje de 
+    base a colector en saturación de los transistores BJT, una mayor caída de voltaje en los diodos,
+    entre otros. Sin embargo, el voltaje de salida del multiplicador de voltaje
+    es suficiente para alimentar el sensor de corriente y el DAC al ser todavia
+    menor a $-7\text{V}$, y puesto que el amplificador operacional empleado no 
+    opera cerca de los valores de saturación, el ruido por conmutación
+    de los transistores BJT no afecta al funcionamiento del sensor de corriente
+    ni del DAC.
+
+
+

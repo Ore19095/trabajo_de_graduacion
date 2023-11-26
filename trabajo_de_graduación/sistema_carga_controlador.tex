@@ -1,5 +1,5 @@
 \section{Controlador}
-
+    \label{sec:controlador}
     Para la gestión de los multiplexores de potencia y el control del convertidor
     reductor se diseñó un controlador basado en el microcontrolador ATmega328p.
     El cual tiene las siguientes funciones:
@@ -16,3 +16,56 @@
         \item índicar de forma visual el estado de carga de las baterías mediante
         2 LEDs.
     \end{itemize}
+
+    Para el control de la corriente y voltaje de salida del convertidor reductor
+    se empleó un controlador PID para el voltaje y un controlador PID para la corriente.
+    Para la obtención de un aproximado de cada uno de los parámetros se emplearon 
+    los datos obtenidos de la simulación del convertidor reductor, con los cuales 
+    se obtuvo la funcion de transferencia del sistema tanto para el voltaje como
+    para la corriente, asumiendo que la carga es una resistencia de 10$\Omega$. Con
+    la planta del sistema fue utilizado el PID tuner de MATLAB para obtener los
+    parámetros del controlador PID. Estos fueron calibrados para que funcionaran 
+    de forma correcta con el convertidor reductor, los valores finales de los
+    parámetros del controlador PID se muestran en la tabla \ref{tab:pid_parameters}.
+
+    \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Parámetro & Voltaje & Corriente\\
+            \hline
+            $K_p$ & -1.2515 & -0.1252\\
+            \hline
+            $K_i$ & -500.5 & -40.05 \\
+            \hline
+            $K_d$ & -2.244e-4 & 8.488e-5 \\
+            \hline
+        \end{tabular}
+        \caption{Parámetros del controlador PID}
+        \label{tab:pid_parameters}
+    \end{table}
+
+    Para el control de los multiplexores de potencia se emplearon los pines
+    PB0 y PD7 para seleccionar la batería que se cargará, y los pines PB2 y 
+    PD4 para seleccionar la batería que alimentará al agente robótico.
+
+    El pin PD5 se empleó para en control de la activación y desactivación
+    del convertidor reductor. Para indicar el estado de carga de las baterías
+    se emplearon los pines PB6 y PB7 los cuales tienen un led conectado a cada
+    uno de ellos.
+
+    Para la carga de la batería LiON se implementó un algoritmo de carga
+    basado en carga corriente constante, y carga de voltaje constante, el cual
+    se describe en la sección \ref{sec:alg_lion}. Para la carga de la batería
+    NiMH se implementa un algoritmo denomimado \textit{trickle charge}, el cual 
+    se describe en la sección \ref{sec:alg_nimh}.
+
+    Para deteminar cuando una batería se encuentra descargada en ambos casos
+    es por medio de la medición de la tensión de la batería, cuando la tensión
+    de la batería sea menor a $3\text{V}$ en ambos casos se considera que la
+    batería se encuentra descargada, e indicando al agente robótico que es necesario
+    ir a la estación de carga.
+
+
+
+
