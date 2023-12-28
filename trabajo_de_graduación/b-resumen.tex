@@ -15,9 +15,9 @@ los armónicos de una señal PWM, de forma que únicamente se tenga a la salida 
 componente DC de la señal PWM.
 
 Para la carga de las baterías NiMH se ha implementado el algoritmo de carga 
-denominado cambio negativo de voltaje el cual consiste en la detección de un
-cambio negativo en el voltaje de la batería, lo cual indica que la batería 
-se encuentra completamente cargada. Para la carga de las baterías 
+denominado \textit{trickle charge} el cual consiste en cargar las baterías
+a una corriente constante de valor bajo (para este casó 0.1C) hasta que las
+baterías alcancen su voltaje nominal, el cual es de 6V. Para la carga de las baterías 
 Li-ion se ha implementado el algoritmo de carga
 denominado carga por corriente constante-voltaje constante, deteniendo el proceso
 de carga cuando la corriente entregada a la batería es menor al 10\% de la capacidad
@@ -29,11 +29,7 @@ la carga de las baterías NiMH y
 Li-ion, de forma que ambas baterías puedan ser recargadas con un único convertidor
 reductor. Además, se ha incorporado otro multiplexor 
 de potencia para determinar que batería está proporcionando potencia al 
-agente robótico Pololu 3pi+.
- 
-Adicionalmente se desarrolló una estación de carga que cuenta con conectores USB-A
-hembra para suministrar 12 V a la placa de expansión del agente robótico Pololu 3Pi+
-y adicionalmente se utilizan las líneas D- y D+ de los conectores USB para la
-comunicación UART entre el sistema de carga y la estación.
+agente robótico Pololu 3pi+. Adicionalmente se desarrolló una estación de carga que cuenta con conectores USB-A
+hembra para suministrar 12 V a la placa de expansión del agente robótico Pololu 3Pi+.
 
 

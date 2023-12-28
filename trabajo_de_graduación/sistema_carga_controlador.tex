@@ -9,11 +9,7 @@
         \item Controlar que batería se está cargando mediante un multiplexor de potencia
         \item Controlar el multiplexor de potencia para seleccionar la batería
         que proporcionará la alimentación al agente robótico.
-        \item Permitir la comunicación con la estación de carga mediante comunicación
-        UART.
-        \item  Permitir la comunicación con el adaptador wifi mediante comunicación
-        I2C.
-        \item índicar de forma visual el estado de carga de las baterías mediante
+        \item indicar de forma visual el estado de carga de las baterías mediante
         2 LEDs.
     \end{itemize}
 
@@ -26,7 +22,7 @@
     la planta del sistema fue utilizado el PID tuner de MATLAB para obtener los
     parámetros del controlador PID. Estos fueron calibrados para que funcionaran 
     de forma correcta con el convertidor reductor, los valores finales de los
-    parámetros del controlador PID se muestran en la tabla \ref{tab:pid_parameters}.
+    parámetros del controlador PID se muestran en el cuadro \ref{tab:pid_parameters}.
 
     \begin{table}[H]
         \centering
@@ -54,17 +50,17 @@
     se emplearon los pines PB6 y PB7 los cuales tienen un led conectado a cada
     uno de ellos.
 
-    Para la carga de la batería LiON se implementó un algoritmo de carga
-    basado en carga corriente constante, y carga de voltaje constante, el cual
-    se describe en la sección \ref{sec:alg_lion}. Para la carga de la batería
-    NiMH se implementa un algoritmo denomimado \textit{trickle charge}, el cual 
-    se describe en la sección \ref{sec:alg_nimh}.
+    Con respecto a los algoritmos de carga para ambas baterías, en el caso
+    de la batería LiON se empleó el algoritmo de carga CC-CV, descrito en la
+    sección \ref{sec:alg_lion}. Para la batería de NiMH se empleó el
+    algoritmo de carga denominado \textit{trickle charge}, descrito también en
+    la sección \ref{sec:alg_nimh}.
 
-    Para deteminar cuando una batería se encuentra descargada en ambos casos
-    es por medio de la medición de la tensión de la batería, cuando la tensión
-    de la batería sea menor a $3\text{V}$ en ambos casos se considera que la
-    batería se encuentra descargada, e indicando al agente robótico que es necesario
-    ir a la estación de carga.
+    Para determinar cuando una batería se encuentra descargada en ambos casos es por medio
+de la medición de la tensión de la batería. En el caso de la batería LiON se considera
+que la batería se encuentra descargada cuando la tensión de la batería es menor a 3V,
+mientras que para la batería de NiMH se considera que la batería se encuentra descargada
+al momento de que su tensión es menor o igual a 4V.
 
 
 

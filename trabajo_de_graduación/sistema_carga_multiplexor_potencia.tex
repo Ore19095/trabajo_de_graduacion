@@ -1,7 +1,7 @@
 \section{multiplexor de potencia}
 
     Para la selección de la batería que proporcionará la alimentación al agente
-    robótico, asi como para la selección de la batería que se cargará se diseñó
+    robótico, así como para la selección de la batería que se cargará se diseñó
     un multiplexor de potencia empleando transistores MOSFET canal P, en 
     configuración \textit{back to back} como se muestra en la figura \ref{fig:power_switch}.
 
@@ -13,7 +13,7 @@
     \end{figure}
 
     En el conmutador de la figura \ref{fig:power_switch} se puede observar que se
-    emplearon 2 transistores MOSFET caddnal P, de modelo AO3401, estos fueron
+    emplearon 2 transistores MOSFET de canal P, de modelo AO3401, estos fueron
     seleccionados debido a que tienen una corriente de \textit{drain} máxima de
     $4\text{A}$, y una resistencia de \textit{drain} a \textit{source} de 
     $0.06\Omega$, lo cual permite que el multiplexor tenga una caída de tensión
@@ -24,9 +24,10 @@
     entre \textit{gate} y \textit{source} del transistor MOSFET sea de $0\text{V}$,
     cuando el transistor M3 no se encuentre en conducción, asegurando que 
     el conmutador no se encuentre en conducción cuando no se requiera. Los componentes 
-    $R_2$ y $C_1$ tienen como función limitar la corriente drenada \textit{gate} de
-    los transistores MOSFETs M1 y M2 de forma que se evite dañar los transistores
-    cuando se realice el cambio de estado del conmutador, mientras que el propósito
+    $R_2$ y $C_1$ tienen como función limitar la corriente drenada por el terminal \textit{gate} de
+    los transistores MOSFETs M1 y M2 de forma estos no sean dañados por una corriente
+    elevada
+    al realizar cambio de estado del conmutador, mientras que el propósito
     de la resistencia $R_3$ evitar que la terminal \textit{gate} del transistor
     M3 se encuentre en un estado flotante.
 

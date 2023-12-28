@@ -1,7 +1,7 @@
 \section{Conversor digital a analógico (DAC)}
 
     Para controlar el voltaje de salida del convertidor reductor es necesario
-    poder generar un voltaje de control de forma digital. Para ello se diseñó
+    poder generar un voltaje de analógico empleando un microcontrolador. Para ello se diseñó
     un conversor digital a analógico (DAC) utilizando un filtro RC de primer
     orden y un amplificador operacional en modo seguidor de voltaje. El DAC
     propuesto se muestra en la figura \ref{fig:dac}.
@@ -13,7 +13,7 @@
         \label{fig:dac}
     \end{figure}
 
-    Ya que para la generación de la de PWM se utilizó el módulo PWM1 (debido
+    Para la generación de la señal PWM se utilizó el módulo PWM1 (debido
     a que este es el que presenta una mayor resolución) del ATmega328p, con el 
     cual se puede generar una señal PWM con una resolución de 10 bits, que en
     conjunto con una frecuencia de operación para el microcontrolador de $8\text{MHz}$
@@ -32,8 +32,8 @@
     \end{equation}
 
     Se fijó el valor del capacitor en $0.1\mu\text{F}$, por lo que el valor de la
-    resistencia es de $22.7\text{K}\Omega$, por lo que se utilizará el valor 
-    de resistencia comercial más cercano, el cual es de $22\text{K}\Omega$.
+    resistencia es de $22.7\text{K}\Omega$, por lo que se utilizó el valor 
+    de resistencia comercial más cercano, el cual corresponde a $22\text{K}\Omega$.
     Este cambio realizado en valor de la resistencia no afecta
     significativamente el comportamiento del filtro, ya que el objetivo 
     principal del mismo es atenuar los armónicos de la señal PWM, que es 
@@ -44,7 +44,7 @@
     Para comprobar el correcto funcionamiento del DAC diseñado se realizó una
     simulación del mismo. Para ello se empleó el simulador LTspice, junto con
     el modelo spice proporcionado por texas instruments para el circuito integrado
-    TL082 (descarga disponible en \cite{noauthor_tl082_nodate}). Para ello se 
+    TL082 (descarga disponible en \cite{noauthor_tl081_nodate}). Para ello se 
     generó una señal pwm de $15.625KHz$ la cual varía su ciclo de trabajo 
     de forma que en la salida se obtenga una señal senoidal de $10\text{Hz}$. 
     En la figura
@@ -70,7 +70,7 @@
     se muestra la transformada de Fourier discreta (DFT) de la señal de salida
     del DAC, y de la señal PWM de entrada respectivamente. Se puede ver 
     que los armónicos correspondientes a la señal PWM de entrada son atenuados
-    hasta el punto de que no son visibles en la DFT de la señal de salida del
+    hasta el punto de no ser visibles en la DFT de la señal de salida del
     DAC, lo cual es lo esperado, ya que el filtro RC tiene una frecuencia de corte
     de $72\text{Hz}$, mientras que la frecuencia de la señal PWM es de 
     $15.625\text{KHz}$.
@@ -89,7 +89,7 @@
         \label{fig:sim_dac_fft_in}
     \end{figure}
 
-    \subsection{Pruebas con DAC}
+    \subsection{Pruebas físicas con DAC}
 
     Para comprobar el correcto funcionamiento del DAC diseñado se realizó una
     prueba del DAC, en la cual se generaró 2 señales, una senoidal y una triangular,
@@ -120,10 +120,10 @@
      Se puede observar que ambas señales
      tienen una amplitud de $5\text{V}$, y que la señal senoidal tiene una frecuencia
      de $4.91\text{Hz}$, mientras que la señal triangular tiene una frecuencia de
-     $2.56\text{Hz}$. La razon por la cual las frecuencias de las señales generadas
+     $2.56\text{Hz}$. La razón por la cual las frecuencias de las señales generadas
      son bajas es debido a la frecuencia de corte del filtro RC, que es de $72\text{Hz}$,
      por lo que señales de mayor frecuencia son atenuadas, hecho que no afecta 
-     al sistema de carga multiquímica, ya que la el cambio de voltaje de voltaje 
-     en ambas baterias se realiza de forma lenta, por lo que no es necesario
+     al sistema de carga multiquímica, ya que la el cambio de voltaje  
+     en ambas baterías se realiza de forma lenta, por lo que no es necesario
      generar señales de alta frecuencia.
  

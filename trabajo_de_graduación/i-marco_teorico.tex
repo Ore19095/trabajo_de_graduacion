@@ -94,6 +94,12 @@ excesivo de la batería, lo que a su vez contribuye significativamente a prolong
 Para la detección del punto de inflexión es necesaria la primera derivada del voltaje de la batería con respecto 
 al tiempo, en la práctica esta es aproximada mediante la medición en tiempo real \cite{nicolai_nickel-cadmium_1995}.
 
+Adicionalmente es posible emplear un método de carga denominado \textit{trickle
+charge} o en español, carga por goteo. Este método consiste en aplicar una 
+corriente de carga constante de un valor muy bajo, usualmente 0.1C, hasta que
+el voltaje de la batería alcance un valor preestablecido, típicamente 1.4V, 
+momento en el cual se considera que la batería se encuentra totalmente cargada
+\cite{microchip_trickle}.
 \section{Convertidores conmutados}
 
 En el campo de la electrónica de potencia, el principal elemento que es esencial es el convertidor conmutado, el cual
@@ -365,7 +371,7 @@ en el caso sin prioridad, el bloqueo ante corrientes inversas debe seguir presen
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=.5]{imagenes/priorityMUX.png}
+    \includegraphics[scale=.4]{imagenes/priorityMUX.png}
     \caption{Multiplexor de potencia con prioridad \cite{triano_basics_2020}}
     \label{fig:priorityMux}
 \end{figure}
@@ -410,7 +416,7 @@ la figura \ref{fig:ampOp} se muestra el símbolo de un amplificador operacional.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{imagenes/ideal_opamp.png}
+    \includegraphics[scale=0.3]{imagenes/ideal_opamp.png}
     \caption{Símbolo de un amplificador operacional \cite{electronic_Boylestad}}
     \label{fig:ampOp}
 \end{figure}
@@ -439,7 +445,7 @@ se muestra el diagrama de un amplificador diferencial \cite{electronic_Boylestad
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.5]{imagenes/ampDif.png}
+    \includegraphics[scale=0.3]{imagenes/ampDif.png}
     \caption{Diagrama de un amplificador diferencial \cite{electronic_Boylestad}}
     \label{fig:ampDif}
 \end{figure}
@@ -452,7 +458,6 @@ La ecuación que describe el comportamiento de un amplificador diferencial es la
 
 Si el valor de $R_1$ es igual a $R_2$ y el valor de $R_3$ es igual a $R_4$, la ecuación
 \ref{eq:ampDif} se puede simplificar a la ecuación \ref{eq:ampDifSimp}.
-
 \begin{equation}
     V_{out} =  \frac{R_4}{R_2}(V_2 - V_1)
     \label{eq:ampDifSimp}

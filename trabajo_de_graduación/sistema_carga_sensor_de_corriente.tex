@@ -5,12 +5,21 @@
     está entregando a la batería. Para ello se diseñó un sensor de corriente
     basado en el amplificador operacional TL082.
 
-    El sensor tiene 2 componentes principales, el amplificador diferencial y 
-    la resistencia de sensado. El amplificador diferencial se encarga de 
+    El sensor tiene 3 componentes principales, el amplificador diferencial, 
+    la resistencia de sensado y un filtro RC para eliminar el ruido de conmutación
+    en la resistencia de sensado. El amplificador diferencial se encarga de 
     amplificar la diferencia de potencial entre los terminales de la resistencia
     de sensado, la cual es proporcional a la corriente que circula por la misma.
     La resistencia de sensado tiene un valor de $15 \text{m}\Omega$, con una
-     tolerancia de $\pm 5\%$.
+     tolerancia de $\pm 5\%$. Para el filtro RC se escogió una frecuencia de corte
+     de $7.96\text{kHz}$, con el cual es posible eliminar el ruido de conmutación
+    en la resistencia de sensado, la frecuencia de corte escogida
+    se debe a 2 razones, la primera es que la frecuencia de conmutación del
+    convertidor reductor es de $150\text{kHz}$, y la segunda es que no se desea
+    que las resistencias del filtro RC sean de valor alto con relación a las
+    resistencias del amplificador diferencial, ya que esto puede afectar la
+    precisión del sensor, por lo que se escogió que las resistencias del filtro
+    RC sean de $10\Omega$.
 
     Para poder medir una corriente máxima de $1.5\text{A}$ se escogió que 
     la ganancia para el amplificador diferencial (ver figura \ref{fig:ampDif})
@@ -62,20 +71,21 @@
     $4\Omega$ y $30\Omega$ para simular la carga de la batería. Los resultados 
     obtenidos son mostrados en la figura \ref{fig:mediciones_sensor_grap}. 
 
-    \begin{figure}[H]
-        \centering
-\begin{tikzpicture}
+\begin{figure}[H]
     
-    \begin{axis}[
-        xlabel={Corriente (A)},
-        ylabel={Voltaje (V)},
-        xmin=0, xmax=2,
-        ymin=0, ymax=5.5,
-        legend pos=north west,
-        ymajorgrids=true,
-        xmajorgrids=true,
-        grid style=dashed,
-    ]
+    \centering     
+    \begin{tikzpicture}
+        
+        \begin{axis}[
+            xlabel={Corriente (A)},
+            ylabel={Voltaje (V)},
+            xmin=0, xmax=2,
+            ymin=0, ymax=5.5,
+            legend pos=north west,
+            ymajorgrids=true,
+            xmajorgrids=true,
+            grid style=dashed,
+        ]
      
     \addplot[color=orange,mark=o,]
         coordinates {
@@ -102,10 +112,13 @@
             };
     \end{axis}
 \end{tikzpicture}
-\label{fig:mediciones_sensor_grap}
+
+
 \caption{Voltaje de salida del sensor de corriente (naranja valores medidos, azul valores esperados)}
+\label{fig:mediciones_sensor_grap}
 \end{figure}
-    En la figura \ref{fig:mediciones_sensor} se muestra el circuito construido
+ 
+En la figura \ref{fig:mediciones_sensor} se muestra el circuito construido
     en protoboard para la medición de los valores presentados anteriormente.
 
     \begin{figure}[H]

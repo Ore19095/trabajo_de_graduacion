@@ -31,9 +31,9 @@
     lo que la corriente en la base de $Q_3$ es de $I_b = 4\text{mA}$, y el valor
      esperado para la corriente de colector es de $I_c = 40\text{mA}$.
 
-    Para que este transistor actúe como un inversor es necesario que 
-    el transistor $Q_3$ se encuentre alternando entre
-    las regiones de corte y saturación. Para ello es necesario
+    Para que el transistor $Q_3$ actúe como un inversor es necesario que 
+    este se encuentre alternando entre
+    las regiones de corte y saturación. Para asegurar este comportamiento es necesario
     que el producto $I_cR_1$ sea mayor al voltaje en el nodo PVDD, el cual
     es de $12\text{V}$:
     
@@ -49,7 +49,7 @@
     
     Por lo que se utilizó un valor de $R_1 = 1\text{K}\Omega$. Esta señal es 
     pasada en la etapa \textit{push-pull} para aumentar la corriente de salida
-    del inversor,asi como disminuir la impedancia, de forma que sea 
+    del inversor, así como disminuir la impedancia, de forma que sea 
     capaz de alimentar el multiplicador de voltaje.
 
     \subsection{Diseño del multiplicador de voltaje}
@@ -99,7 +99,7 @@
         \label{eq:charge_pump_simp3}
     \end{equation}
 
-    Reemplazando los valores en la ecuación \ref{eq:charge_pump_simp3} se obtiene
+    Reemplazando los valores estimados anteriormente en la ecuación \ref{eq:charge_pump_simp3} se obtiene
     la frecuencia de operación del multiplicador de voltaje debe de ser 
 
         $$
@@ -115,7 +115,7 @@
     \subsection{Prueba física del multiplicador de voltaje}
 
     Para comprobar el correcto funcionamiento del multiplicador de voltaje
-    se añadio el multiplicador de voltaje diseñado, a los circuitos de prueba
+    se añadió el multiplicador de voltaje diseñado, a los circuitos de prueba
     del DAC, el sensor de corriente  y convertidor reductor. En la figura
     \ref{fig:prueba_multiplicador} se muestra el circuito armado en protoboard.
     
@@ -146,14 +146,15 @@
             \caption{Con carga}
             \label{fig:out_multiplicador_load}
         \end{subfigure}
-        \caption{Voltaje de salida del multiplicador de voltaje}
+        \caption{Voltaje de salida del multiplicador de voltaje (azul, salida del multiplicador de voltaje, naranja señal cuadrada
+        de entrada)}
     \end{figure}
     
     en la figura \ref{fig:out_multiplicador_no_load} se puede observar que
     el voltaje de salida del multiplicador de voltaje es de $-10.5\text{V}$ en 
     promedio, mientras que en la figura \ref{fig:out_multiplicador_load} se
     puede observar que el voltaje de salida del multiplicador de voltaje es de
-    $-8.23\text{V}$ en promedio. este resultado es el esperado, ya que el
+    $-8.23\text{V}$ en promedio. Este resultado es el esperado, ya que el
     cuando se le coloca una carga al multiplicador de voltaje, la corriente
     de salida hace que el voltaje de salida disminuya, como es indicado en la 
     ecuación \ref{eq:charge_pump_simp}.
@@ -168,10 +169,10 @@
     cual se obtuvo un voltaje de $-8.23\text{V}$.
     
     La razón por la cual el voltaje de salida del multiplicador de voltaje es menor al esperado,
-     es debido a varios factores:la toleracia de los capacitores empleados, el voltaje de 
+     es debido a varios factores: la tolerancia de los capacitores empleados, el voltaje de 
     base a colector en saturación de los transistores BJT, una mayor caída de voltaje en los diodos,
     entre otros. Sin embargo, el voltaje de salida del multiplicador de voltaje
-    es suficiente para alimentar el sensor de corriente y el DAC al ser todavia
+    es suficiente para alimentar el sensor de corriente y el DAC, al ser
     menor a $-7\text{V}$, y puesto que el amplificador operacional empleado no 
     opera cerca de los valores de saturación, el ruido por conmutación
     de los transistores BJT no afecta al funcionamiento del sensor de corriente

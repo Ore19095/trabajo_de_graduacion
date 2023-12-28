@@ -3,9 +3,11 @@
 Para la carga de la batería Li-ion se escogió el método de carga CC/VC
 descrito en la sección \ref{sec:alg_lion}, la máxima corriente de carga
 se estableció en $1\text{A}$. Para la carga de la batería NiMH se utilizó
-el método de carga de cambio de voltaje negativo descrito en la sección 
+el método de \textit{trikle charge} descrito en la sección 
 \ref{sec:alg_nimh}. Se empleó el mismo convertidor reductor para la carga
-de ambas baterías, por lo que no es posible cargar ambas al mismo tiempo.
+de ambas baterías, por lo que no es posible cargar ambas al mismo tiempo, esto
+debido al espacio reducido del que se dispone para la colocación de componentes
+en el PCB.
 Para determinar que batería será cargada se utilizó un multiplexor de potencia
 construido con transistores MOSFET de canal P.
     
@@ -32,12 +34,12 @@ construido con transistores MOSFET de canal P.
 \chapter{Estación de carga}
 
 La estación de carga está compuesta por 2 partes, la primera es un circuito impreso
-en el cual se encuentran los cosnectores USB, para la transmisión de potencia y 
+en el cual se encuentran los conectores USB, para la transmisión de potencia y 
 datos entre la estación de carga y el sistema de carga multiquímica. La segunda
 parte es una estructura impresa en 3D, la cual tiene como función principal
 proveer un espacio para colocar el circuito impreso descrito anteriormente y 
 los cables USB magnéticos que se utilizarán para realizar la conexión entre
-la estación de carga y el sistema de carga multiquímica.ds
+la estación de carga y el sistema de carga multiquímica.
 
 
 \section{Circuito impreso}
@@ -46,7 +48,7 @@ El circuito impreso tiene 4 componentes principales que se listan a continuació
 
 \begin{itemize}
     \item Conectores USB tipo A hembra
-    \item Cables USB para transmisión de potencia y datos
+    \item Cables USB para transmisión de potencia
     \item \textit{Headers} macho para comunicación serial
     \item Bornera de 2 pines para alimentación de la estación de carga
 \end{itemize}
@@ -62,6 +64,12 @@ El circuito impreso diseñado se muestra en la figura \ref{fig:pcb_estacion_carg
     \vfill
     \begin{subfigure}{0.9\linewidth}
         \centering
+        \includegraphics[scale=0.25]{imagenes/top_charging.png}
+        \caption{Capa superior}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}{0.9\linewidth}
+        \centering
         \includegraphics[scale=0.45]{imagenes/3d_charging.png}
         \caption{Vista 3D}
     \end{subfigure}
@@ -69,11 +77,28 @@ El circuito impreso diseñado se muestra en la figura \ref{fig:pcb_estacion_carg
     \label{fig:pcb_estacion_carga}
 \end{figure}
 
-La PCB de la estación de carga soldada se muestra en la figura \ref{fig:pcb_estacion_carga_soldada}.
+Para sujetar el circuito impreso en el borde de la arena de Robotat se diseñó 
+una estructura impresa en 3D, la cual se muestra en la figura \ref{fig:3d_estacion_carga}.
+La estructura impresa en 3D colocada en el borde arena de Robotat se muestra en la
+ figura \ref{fig:estacion_carga_ensamblaje}.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.3]{imagenes/estacion_de_carga.png}
+    \caption{Diseño de la estructura impresa en 3D para la estación de carga}
+    \label{fig:3d_estacion_carga}
+\end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.2]{imagenes/charger_pcb.jpg}
-    \caption{PCB de la estación de carga soldada}
-    \label{fig:pcb_estacion_carga_soldada}
+    \includegraphics[scale=0.15]{imagenes/estacion_carga_ensamblaje.jpg}
+    \caption{Ensamblaje de la estación de carga}
+    \label{fig:estacion_carga_ensamblaje}
 \end{figure}
+
+Debido al tipo de cable empleado no es posible realizar comunicación UART entre
+la estación de carga y el sistema de carga multiquímica, debido a que los cables
+USB magnéticos no cuentan con los pines necesarios para realizar la comunicación, 
+sin embargo, es posible realizar la comunicación UART con el sistema de carga
+multiquímica a través de pines macho que se encuentran en la placa de expansión
+del sistema de carga multiquímica. 
